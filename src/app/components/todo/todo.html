@@ -1,0 +1,25 @@
+<div class="todo-container">
+  <h1>Todo List</h1>
+  <form (submit)="addTask()">
+    <div class="new-task">
+      <input type="text"
+            [(ngModel)]="newTask"
+            [ngModelOptions]="{standalone: true}"
+            placeholder="Add a new task"
+            required />
+      <button type="submit">Add</button>
+      <!-- <button (click)="addTask()">Add</button> -->
+    </div>
+  </form>
+  <ul class="task-list">
+    @for (todo of todos; track todo.id) {
+      <li [ngClass]="{'completed': todo.iscomplete}">
+        <input type="checkbox"
+               [(checked)]="todo.iscomplete"
+               (change)="toggleComplete(todo.id)" />
+        <span [class.completed]="todo.iscomplete">{{ todo.task }}</span>
+        <button (click)="deleteTask(todo.id)">Remove</button>
+      </li>
+    }
+  </ul>
+</div>
